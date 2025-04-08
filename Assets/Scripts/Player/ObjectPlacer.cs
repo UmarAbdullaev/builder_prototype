@@ -25,8 +25,6 @@ public class ObjectPlacer : MonoBehaviour
         {
             CheckForTargetObject();
         }
-
-        HandleRotation();
     }
 
     private void OnDrawGizmos()
@@ -42,6 +40,8 @@ public class ObjectPlacer : MonoBehaviour
             heldObject.MoveToPosition(hit);
             heldObject.EnablePlacementLogic(true);
 
+            HandleRotation();
+
             if (Input.GetMouseButtonDown(0) && heldObject.IsPlaceable())
             {
                 heldObject.FinalizePlacement(hit);
@@ -53,6 +53,8 @@ public class ObjectPlacer : MonoBehaviour
         {
             heldObject.transform.position = HoldPosition;
             heldObject.EnablePlacementLogic(false);
+
+            heldObject.Rotation(transform.localRotation);
         }
     }
 

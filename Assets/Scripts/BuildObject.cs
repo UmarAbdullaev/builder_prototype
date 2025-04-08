@@ -30,20 +30,22 @@ public class BuildObject : MonoBehaviour
         Vector3 offset = hit.normal * (scale / 2f);
         transform.position = hit.point + offset;
 
-        // Align object's up to the surface normal
         Quaternion alignToSurface = Quaternion.FromToRotation(Vector3.up, hit.normal);
 
-        // Rotate around the surface normal
         Quaternion spin = Quaternion.AngleAxis(surfaceRotationY, hit.normal);
 
-        // Final rotation = spin * surface alignment
-        transform.rotation = spin * alignToSurface;
+        Rotation(spin * alignToSurface);
+    }
+
+    public void Rotation(Quaternion rotation)
+    {
+        transform.rotation = rotation;
     }
 
     public bool IsPlaceable()
     {
         Vector3 halfExtents = Vector3.one * (scale / 2f);
-        Collider[] hits = Physics.OverlapBox(transform.position, halfExtents, Quaternion.identity, ~placeableLayer);
+        Collider[] hits = Physics.OverlapBox(transform.position, halfExtents, transform.rotation, ~placeableLayer);
 
         foreach (var hit in hits)
         {

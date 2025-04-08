@@ -1178,7 +1178,7 @@ MonoBehaviour:
   buildObjectLayer:
     serializedVersion: 2
     m_Bits: 256
-  holdOffset: {x: 0, y: -0.75, z: 1}
+  holdOffset: {x: 0, y: -0.75, z: 1.25}
   rotationStep: 45
 --- !u!1001 &2094242016
 PrefabInstance:
